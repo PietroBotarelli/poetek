@@ -5,28 +5,26 @@ poesia contemporanea. Il progetto è una single-page application statica:
 Netlify distribuisce il frontend, mentre Supabase gestisce autenticazione,
 database, media e aggiornamenti in tempo reale.
 
-Sito operativo (contenuti live dal database): <https://poetek-beta.netlify.app/>
+Visita il sito: <https://poetek-beta.netlify.app/>
 
-Repository dell'infrastruttura: <https://github.com/PietroBotarelli/poetek>.
-Il catalogo, i profili e i file degli utenti sono conservati in Supabase:
-non sono inclusi, ovviamente, nei file né nella cronologia di questo repository.
-Il sito legge il backend e riceve gli aggiornamenti tramite Supabase Realtime.
+Questo repository raccoglie il codice e la documentazione dell’applicazione. Le opere, i profili e i contenuti caricati dagli utenti sono gestiti separatamente e non sono inclusi nel repository.
 
-## Fonte di verità
+## Organizzazione del progetto
 
-- `main` su GitHub contiene codice, schema, migrazioni e procedure operative.
-- Netlify pubblica esclusivamente `web/`.
-- Supabase conserva utenti e dati di produzione: un deploy del frontend ovviamente non li
-  modifica.
-- `web/beta-config.js` contiene soltanto URL e publishable key pubblici. Per ovvie ragioni, nessuna
-  service-role key o credenziale SMTP entra nel repository.
+- Codice e documentazione — GitHub. 'main' contiene il codice dell’applicazione, lo schema del database, le migrazioni SQL e le procedure per installare il progetto.
 
-## Struttura
+- Pubblicazione del sito — Netlify. Netlify distribuisce la cartella `web/`, che contiene il frontend: pagine, stili e codice. Le modifiche caricate su `main` attivano l’aggiornamento automatico del sito.
+
+- Dati e utenti — Supabase. Supabase gestisce gli account e conserva opere, raccolte e immagini. Un aggiornamento del frontend non sovrascrive questi dati. Le modifiche alla struttura del database vengono applicate separatamente attraverso le migrazioni SQL.
+
+- Configurazione pubblica. Il file `web/beta-config.js` contiene l’URL del progetto Supabase e la chiave pubblica necessaria al funzionamento del sito. Le chiavi amministrative sono escluse dal repository.
+
+## Struttura dei file
 
 ```text
 web/                         frontend distribuito
-  index.html                 shell, accessibilità e Content Security Policy
-  main.js                    entry point: cablaggio moduli ed event listener globali
+  index.html                 pagina principale e struttura dell'interfaccia
+  main.js                    avvio dell'applicazione e collegamento dei moduli
   backend.js                 unico adattatore verso Supabase
   beta-config.js             configurazione pubblica dell'ambiente
   styles.css                 fondamenta visive
@@ -34,10 +32,10 @@ web/                         frontend distribuito
   assets/                    immagini e texture locali usate dal frontend
   state/store.js             stato centralizzato dell'applicazione
   config/constants.js        costanti e valori di default
-  data/seed.js                dati seed del catalogo
-  domain/                    logica applicativa pura (selectors.js, actions.js)
+  data/seed.js               catalogo iniziale vuoto
+  domain/                    logica applicativa: azioni e selezione dei dati
   router/router.js           routing e navigazione
-  services/                  integrazione backend (backend-bridge.js) e media (media.js)
+  services/                  integrazione backend, gestione media e condivisione
   utils/                     helper di basso livello (dom.js, parsers.js)
   views/                     template di rendering per ciascuna pagina
 supabase/
@@ -51,30 +49,12 @@ docs/
 netlify.toml                 configurazione di pubblicazione e header
 ```
 
-## Validazione e rilascio
+## Documentazione
+ARCHITECTURE.md: architettura dell’applicazione, componenti e flussi dei dati.
+OPERATIONS.md: installazione, configurazione, rilascio e manutenzione.
 
-```powershell
-npm ci --ignore-scripts
-npm run check
-npm test
-```
+## Licenza e contenuti
+Il codice è consultabile con tutti i diritti riservati, come indicato in LICENSE. La pubblicazione del repository non concede automaticamente il permesso di riutilizzarlo o distribuirlo.
 
-La stessa validazione viene eseguita da GitHub Actions su push e pull request.
-Un push su `main` attiva il deploy di produzione Netlify; le pull request
-generano soltanto deploy preview.
+Per i diritti relativi ai testi, alle immagini e agli altri contenuti, consultare CONTENT-RIGHTS.md.
 
-Le modifiche al database seguono una pipeline separata: aggiungere una nuova
-migrazione, revisionarla, provarla in un progetto di sviluppo e solo dopo
-applicarla alla produzione.
-
-Per replicare o gestire il sistema, seguire
-[`docs/OPERATIONS.md`](docs/OPERATIONS.md). Le decisioni architetturali e il
-contratto dati consultabili in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
-
-## Revisione per la pubblicazione — 30 ottobre 2026
-
-Codice consultabile con tutti i diritti riservati: vedere LICENSE. Per i materiali
-editoriali vedere CONTENT-RIGHTS.md. I dati degli utenti non sono ovviamente distribuiti
-con il repository, il quale non distribuisce neppure dati dimostrativi o contenuti editoriali.
-
-Si può accedere direttamente al sito funzionante, aggiornato in tempo reale tramite apposito link: <https://poetek-beta.netlify.app/>
