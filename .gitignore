@@ -1,0 +1,9 @@
+.env
+.env.*
+!beta-config.js
+*.local
+poetek-local-export-*.json
+node_modules/
+
+poetek-account-export-*.json
+coverage/

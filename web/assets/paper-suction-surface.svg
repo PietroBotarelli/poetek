@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" preserveAspectRatio="none">
+  <defs>
+    <radialGradient id="lift" cx="50%" cy="48%" r="60%">
+      <stop offset="0" stop-color="#fffaf0" stop-opacity=".16"/>
+      <stop offset=".58" stop-color="#fffaf0" stop-opacity=".035"/>
+      <stop offset="1" stop-color="#0e0c09" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070604" stop-opacity=".95"/>
+      <stop offset=".48" stop-color="#17120e" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#5e4c3d" stop-opacity=".12"/>
+    </linearGradient>
+    <filter id="seam" x="-6%" y="-8%" width="112%" height="116%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+  <!-- The wide dark ring is the underside of the paper, not four decorative corners. -->
+  <path fill="url(#rim)" fill-rule="evenodd" d="M0 118C30 72 79 27 160 9C310-10 490-10 640 9C721 27 770 72 800 118C783 193 787 327 800 402C770 448 721 493 640 511C490 530 310 530 160 511C79 493 30 448 0 402C13 327 17 193 0 118ZM42 118C63 82 102 55 168 43C315 22 485 22 632 43C698 55 737 82 758 118C744 191 747 329 758 402C737 438 698 465 632 477C485 498 315 498 168 477C102 465 63 438 42 402C56 329 53 191 42 118Z"/>
+  <path fill="#0e0b08" fill-opacity=".29" fill-rule="evenodd" d="M42 118C63 82 102 55 168 43C315 22 485 22 632 43C698 55 737 82 758 118C744 191 747 329 758 402C737 438 698 465 632 477C485 498 315 498 168 477C102 465 63 438 42 402C56 329 53 191 42 118ZM62 130C83 99 115 76 176 65C320 47 480 47 624 65C685 76 717 99 738 130C725 198 728 322 738 390C717 421 685 444 624 455C480 473 320 473 176 455C115 444 83 421 62 390C72 322 75 198 62 130Z"/>
+  <path fill="url(#lift)" d="M62 130C83 99 115 76 176 65C320 47 480 47 624 65C685 76 717 99 738 130C725 198 728 322 738 390C717 421 685 444 624 455C480 473 320 473 176 455C115 444 83 421 62 390C72 322 75 198 62 130Z"/>
+  <!-- Subtle fold seam: continuous and balanced, never circular. -->
+  <path d="M42 118C63 82 102 55 168 43C315 22 485 22 632 43C698 55 737 82 758 118C744 191 747 329 758 402C737 438 698 465 632 477C485 498 315 498 168 477C102 465 63 438 42 402C56 329 53 191 42 118Z" fill="none" stroke="#fff3dd" stroke-opacity=".18" stroke-width="2" filter="url(#seam)"/>
+</svg>

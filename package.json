@@ -1,0 +1,13 @@
+{
+  "name": "poetek-beta",
+  "version": "2.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "legal": "node scripts/build-legal.mjs"
+  },
+  "devDependencies": { "@electric-sql/pglite": "0.5.13" },
+  "engines": { "node": ">=22" }
+}

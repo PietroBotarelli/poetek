@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" preserveAspectRatio="none">
+  <!-- A single, symmetrical sheet silhouette: the material disappears into the void at every edge. -->
+  <path fill="#fff" d="M0 118C30 72 79 27 160 9C310-10 490-10 640 9C721 27 770 72 800 118C783 193 787 327 800 402C770 448 721 493 640 511C490 530 310 530 160 511C79 493 30 448 0 402C13 327 17 193 0 118Z"/>
+</svg>

@@ -1,0 +1,44 @@
+name: Validate repository
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install test dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Verify authorization and regression cases
+        run: npm test
+
+      - name: Check JavaScript syntax
+        run: |
+          # Script classici caricati con <script>: si analizzano come tali.
+          node --check web/backend.js
+          node --check web/beta-config.js
+          # Tutto il resto del frontend è composto da moduli ES. `node --check`
+          # sceglie la modalità dall'estensione, quindi ogni modulo viene
+          # analizzato da una copia .mjs.
+          for file in $(find web -name '*.js' ! -name 'backend.js' ! -name 'beta-config.js' | sort); do
+            copy="/tmp/$(echo "$file" | tr '/' '_').mjs"
+            cp "$file" "$copy"
+            node --check "$copy"
+          done
+
+      - name: Validate repository contract
+        run: node scripts/validate-repository.mjs

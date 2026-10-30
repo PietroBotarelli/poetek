@@ -1,0 +1,1702 @@
+/* Accesso essenziale: il controllo resta disponibile senza richiamo aggiuntivo. */
+.topbar-access::before,
+.topbar-access::after,
+.topbar-access-note {
+  display: none !important;
+}
+
+/*
+  Poetek — direzione editoriale di revisione
+  Ambiente locale, separato dalla Beta pubblica.
+*/
+
+:root {
+  --void: #15130f;
+  --panel: #1b1814;
+  --panel-2: #24201b;
+  --paper: #efebe2;
+  --paper-dim: #c6beb1;
+  --white: #f8f5ee;
+  --book-paper: #e8ddc5;
+  --ink: #201d18;
+  --muted: #a69e92;
+  --line: rgba(239, 235, 226, .17);
+  --line-strong: rgba(239, 235, 226, .34);
+  --electric: #d49a78;
+  --coral: #d49a78;
+  --violet: #9b735e;
+  --blue: #b3a18d;
+  --paper-sheet-outline: polygon(0 13%, 2.8% 8.5%, 8% 4.2%, 16% 1.7%, 28% .4%, 50% 0%, 72% .4%, 84% 1.7%, 92% 4.2%, 97.2% 8.5%, 100% 13%, 99.2% 28%, 98.8% 42%, 100% 50%, 98.8% 58%, 99.2% 72%, 100% 87%, 97.2% 91.5%, 92% 95.8%, 84% 98.3%, 72% 99.6%, 50% 100%, 28% 99.6%, 16% 98.3%, 8% 95.8%, 2.8% 91.5%, 0 87%, .8% 72%, 1.2% 58%, 0 50%, 1.2% 42%, .8% 28%);
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Manrope", Arial, sans-serif;
+  --mono: "DM Mono", Consolas, monospace;
+}
+
+html,
+body { width: 100%; max-width: 100%; overflow-x: clip; background: var(--void); }
+
+body { color: var(--paper); font-family: var(--sans); }
+
+button,
+input,
+textarea,
+select { border-radius: 0 !important; }
+
+.ambient { display: none; }
+
+.side-rail {
+  width: 264px;
+  padding: 28px 22px 22px;
+  border-right-color: var(--line);
+  background: #11100d;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.app-shell,
+.main-stage,
+#app,
+.page,
+.home-page,
+.home-intro,
+.home-paths,
+.home-section { min-width: 0; max-width: 100%; }
+
+.app-shell { width: 100%; overflow-x: clip; }
+
+.brand { gap: 0; font: 500 32px/.85 var(--serif); letter-spacing: -.055em; }
+.brand-glyph { display: none; }
+.brand-name { padding: 0; }
+.side-nav { gap: 0; margin-top: 68px; border-top: 1px solid var(--line); }
+.side-link { min-height: 48px; padding: 0; gap: 0; border-bottom: 1px solid var(--line); border-radius: 0; color: var(--paper-dim); font-size: 12px; }
+.side-link:hover,
+.side-link.active { color: var(--paper); background: transparent; }
+.nav-icon { width: 29px; color: var(--muted); font: 9px/1 var(--mono); letter-spacing: .04em; }
+.side-link.active .nav-icon { color: var(--electric); }
+.saved-count { min-width: 17px; height: auto; padding: 0; border-radius: 0; background: transparent; color: var(--electric); font: 9px/1 var(--mono); }
+.rail-footer { padding: 0; color: var(--muted); font-size: 9px; }
+.signal,
+.status-orb { background: var(--electric); box-shadow: none; }
+
+.main-stage { padding: 0 clamp(22px, 5.5vw, 110px); }
+.topbar { min-height: 76px; gap: 15px; }
+.menu-toggle { width: 34px; height: 31px; border-color: var(--line-strong); background: transparent; }
+.menu-toggle:hover,
+.menu-toggle:focus-visible { border-color: var(--electric); color: var(--electric); }
+.topbar-title { color: var(--paper-dim); font-size: 11px; letter-spacing: .025em; }
+.topbar-status { color: var(--muted); font-size: 9px; }
+.beta-signout { border-color: var(--line-strong); color: var(--paper-dim); }
+
+.kicker { color: var(--electric); font-size: 9px; letter-spacing: .13em; }
+.display { font-family: var(--serif); }
+.section-title { color: var(--paper); font-family: var(--serif); }
+.page { min-height: calc(100vh - 76px); }
+
+/* Home: l'orientamento precede il catalogo. */
+.home-page { max-width: 1320px; padding: clamp(36px, 5vw, 70px) 0 92px; }
+.home-intro { display: block; padding: 0 0 35px; border-bottom: 1px solid var(--line-strong); }
+.home-intro-overline { grid-column: 1 / -1; margin: 0; color: var(--electric); font: 9px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+.home-intro-main { max-width: 920px; }
+.home-intro-main h1 { margin: 21px 0 0; color: var(--paper); font: 500 clamp(47px, 4.8vw, 78px)/.93 var(--serif); letter-spacing: -.065em; }
+.home-intro-description { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 13px 22px; margin-top: 25px; }
+.home-intro-description > p { max-width: none; margin: 0; color: var(--paper-dim); white-space: nowrap; font: 400 clamp(17px, 1.35vw, 21px)/1.38 var(--serif); }
+.project-about { position: relative; flex: 0 0 auto; }
+
+.home-paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); }
+.home-path { position: relative; min-height: 174px; display: grid; grid-template-columns: minmax(0, 1fr) 19px; align-items: start; gap: 13px; padding: 24px 21px 23px 0; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--paper); text-align: left; transition: background .18s ease, color .18s ease; }
+.home-path + .home-path { padding-left: 21px; }
+.home-path:last-child { border-right: 0; }
+.home-path:hover,
+.home-path:focus-visible { background: var(--paper); color: var(--ink); outline: 0; }
+.home-path-copy { display: grid; gap: 14px; }
+.home-path-copy strong { font: 500 clamp(25px, 2.15vw, 37px)/.96 var(--serif); letter-spacing: -.055em; }
+.home-path-copy small { max-width: 215px; color: var(--electric); font: 11px/1.45 var(--sans); }
+.home-path:hover .home-path-copy small { color: #9c6245; }
+.home-path-arrow { align-self: end; color: var(--electric); font: 22px/1 var(--serif); }
+.home-section { padding-top: 52px; }
+.home-section + .home-section { padding-top: 52px; }
+.home-section-heading { align-items: center; margin-bottom: 15px; }
+.home-section-heading > div { display: block; }
+.home-section-label { margin: 0; color: var(--paper); font: 500 clamp(24px, 2.2vw, 34px)/1 var(--serif); letter-spacing: -.055em; }
+.home-section-meta { margin: 7px 0 0; color: var(--electric); font: 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.section-detail { max-width: none; color: var(--muted); font-size: 9px; }
+.section-heading-actions { align-items: center; }
+.home-expand { border-bottom-color: var(--electric); color: var(--electric); font-size: 9px; }
+.home-expand:hover,
+.home-expand:focus-visible { color: var(--paper); border-bottom-color: var(--paper); }
+.home-empty-reading { max-width: none; padding: 21px 0; border-top-color: var(--line); border-bottom: 1px solid var(--line); }
+.home-empty-reading p { color: var(--paper-dim); font-size: 20px; }
+.home-subheading { padding: 13px 0; margin: 0; border-top: 1px solid var(--line); color: var(--electric); font-size: 9px; }
+.home-subheading span:last-child { color: var(--muted); }
+.home-ranking-group + .home-ranking-group { margin-top: 30px; }
+.home-expanded-collection-type { color: #756e65; font: 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.home-expanded-collection-type + .home-expanded-title { margin-top: 12px; }
+
+/* La carta è presente ma non incorniciata: ai margini si dissolve nel buio,
+   lasciando che siano le parole a occupare davvero lo spazio. */
+.rail,
+.home-rail { grid-auto-columns: minmax(246px, 1fr); gap: clamp(16px, 2.1vw, 30px); overflow-x: auto; overflow-y: visible; padding: 14px 12px 26px; border: 0; touch-action: pan-x pan-y; }
+.rail-card,
+.home-poem-card,
+.author-rail-card,
+.collection-rail-card { min-height: 252px; padding: 23px 24px; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; transition: transform .20s ease, color .20s ease; }
+.rail-card:hover,
+.home-poem-card:hover,
+.author-rail-card:hover,
+.collection-rail-card:hover { border-color: transparent; transform: translateY(-2px); box-shadow: none; }
+.rail-card::after,
+.home-poem-card::after,
+.author-rail-card::after,
+.collection-rail-card::after { display: none; }
+.rail-card:hover::after,
+.home-poem-card:hover::after,
+.author-rail-card:hover::after,
+.collection-rail-card:hover::after { display: none; }
+.rail-card.card-presentation--text::before,
+.collection-rail-card.card-presentation--text::before,
+.author-rail-card::before { position: absolute; z-index: 0; inset: 0; pointer-events: none; clip-path: var(--paper-sheet-outline); background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 48%, rgba(122,86,43,.06)), var(--card-background, var(--book-paper)); -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); filter: url("#poetek-paper-warp") drop-shadow(0 14px 13px rgba(0,0,0,.33)); transform: perspective(900px) rotateX(.75deg) scaleY(.985); transform-origin: center; content: ""; }
+.rail-card.card-presentation--image-text .card-image,
+.collection-rail-card.card-presentation--image-text .card-image,
+.card-presentation--image-text::before { border-radius: 0; -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); }
+.rail-card.card-presentation--image-text .card-image,
+.collection-rail-card.card-presentation--image-text .card-image { clip-path: var(--paper-sheet-outline); filter: url("#poetek-paper-warp") drop-shadow(0 14px 13px rgba(0,0,0,.33)); transform: perspective(900px) rotateX(.75deg) scaleY(.985); transform-origin: center; }
+.card-presentation--image-text::before { clip-path: var(--paper-sheet-outline); filter: url("#poetek-paper-warp"); }
+.rail-card::after,
+.home-poem-card::after,
+.author-rail-card::after,
+.collection-rail-card::after { display: block; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: radial-gradient(86px 72px at 0 0, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) top left / 90px 76px no-repeat, radial-gradient(86px 72px at 100% 0, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) top right / 90px 76px no-repeat, radial-gradient(86px 72px at 0 100%, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) bottom left / 90px 76px no-repeat, radial-gradient(86px 72px at 100% 100%, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) bottom right / 90px 76px no-repeat; content: ""; }
+.home-rail > :nth-child(3n + 2),
+.home-rail > :nth-child(4n) { transform: none; }
+
+/* Una sola sagoma continua: i quattro margini sono tirati verso l'interno,
+   non coperti da quattro decorazioni circolari. */
+.rail-card::after,
+.home-poem-card::after,
+.author-rail-card::after,
+.collection-rail-card::after { display: none; }
+.rail-index,
+.card-type,
+.collection-rail-type { color: #777067; font-size: 9px; }
+.home-poem-card .home-attack,
+.rail-card h3,
+.collection-rail-card h3 { margin: auto 0; color: var(--ink); font: italic 400 clamp(25px, 2.1vw, 36px)/1.02 var(--serif); letter-spacing: -.04em; }
+.home-poem-card .home-poem-footer p,
+.author-rail-meta,
+.collection-rail-card p { color: #716b62 !important; font-size: 11px; }
+.home-open,
+.collection-rail-open { color: #4b4037; font-size: 9px; }
+.author-rail-card > div { margin: auto 0; }
+.author-rail-name { margin: auto 0 8px !important; color: var(--ink) !important; font: 500 clamp(26px, 2.2vw, 37px)/1.02 var(--serif) !important; letter-spacing: -.055em; }
+.home-poem-card.card-presentation--light .home-attack,
+.collection-rail-card.card-presentation--light h3 { color: var(--white); }
+
+/* Ricerca, profili e libreria usano lo stesso vocabolario tipografico. */
+.discover-page,
+.library-page,
+.profile-page,
+.collection-page,
+.publish-page { max-width: 1300px; padding-top: clamp(38px, 5vw, 72px); }
+.catalogue-heading { max-width: 920px; }
+/* "Catalogo" apre la pagina da solo, senza un titolo sotto a sostenerlo:
+   al corpo degli altri soprattitoli si perdeva. Sale di due punti. */
+.catalogue-heading .kicker { font-size: 11px; }
+.catalogue-heading .display { margin: 13px 0 20px; }
+.catalogue-intro { max-width: 560px; margin: 0 0 31px; color: var(--paper-dim); font: 400 19px/1.42 var(--serif); }
+.search-area { max-width: 920px; }
+.search-icon { color: var(--electric); }
+.search-area input { height: 61px; padding-left: 49px; border: 0; border-bottom: 1px solid var(--line-strong); background: transparent; color: var(--paper); font-size: 18px; }
+.search-area input:focus { border-color: var(--electric); box-shadow: none; }
+.filters { gap: 0; padding: 22px 0 20px; border-bottom-color: var(--line); }
+.filter-button { padding: 8px 11px; border: 0; border-right: 1px solid var(--line); border-radius: 0; color: var(--paper-dim); font-size: 10px; }
+/* Senza "Tutte le opere" davanti, il primo tema parte dal margine. */
+.filters .filter-button:first-child { padding-left: 0; }
+.filter-button:hover,
+.filter-button.active { background: transparent; color: var(--electric); }
+.result-note { color: var(--muted); font-size: 9px; }
+.poem-card-grid,
+.saved-grid,
+.author-card-grid { gap: clamp(16px, 2vw, 26px); grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); border: 0; }
+.poem-card,
+.author-profile-card { min-height: 260px; padding: 23px 24px; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; transition: transform .20s ease, color .20s ease; }
+.poem-card:hover,
+.author-profile-card:hover { border-color: transparent; transform: translateY(-2px); box-shadow: none; }
+.poem-card::after,
+.author-profile-card::after { display: none; }
+.poem-card:hover::after,
+.author-profile-card:hover::after { display: none; }
+.poem-card.card-presentation--text::before,
+.author-profile-card::before { position: absolute; z-index: 0; inset: 0; pointer-events: none; clip-path: var(--paper-sheet-outline); background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 48%, rgba(122,86,43,.06)), var(--card-background, var(--book-paper)); -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); filter: url("#poetek-paper-warp") drop-shadow(0 14px 13px rgba(0,0,0,.33)); transform: perspective(900px) rotateX(.75deg) scaleY(.985); transform-origin: center; content: ""; }
+.poem-card.card-presentation--image-text .card-image { border-radius: 0; clip-path: var(--paper-sheet-outline); -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%); filter: url("#poetek-paper-warp") drop-shadow(0 14px 13px rgba(0,0,0,.33)); transform: perspective(900px) rotateX(.75deg) scaleY(.985); transform-origin: center; }
+.poem-card::after,
+.author-profile-card::after { display: block; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: radial-gradient(86px 72px at 0 0, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) top left / 90px 76px no-repeat, radial-gradient(86px 72px at 100% 0, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) top right / 90px 76px no-repeat, radial-gradient(86px 72px at 0 100%, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) bottom left / 90px 76px no-repeat, radial-gradient(86px 72px at 100% 100%, var(--void) 0 47%, rgba(21,19,15,.92) 60%, rgba(21,19,15,.56) 72%, transparent 100%) bottom right / 90px 76px no-repeat; content: ""; }
+.poem-card::after,
+.author-profile-card::after { display: none; }
+.author-profile-card > * { position: relative; z-index: 2; }
+.poem-card-lead,
+.poem-card[data-card-lead="title"] .poem-card-lead { margin: auto 0; font: italic 400 clamp(25px, 2.2vw, 37px)/1.02 var(--serif); letter-spacing: -.04em; }
+.author-profile-name { margin: auto 0; font: 500 clamp(25px, 2.2vw, 37px)/1.02 var(--serif); letter-spacing: -.055em; }
+.card-kicker { color: #756e65; font-size: 9px; }
+.card-author,
+.author-profile-footer { color: #716b62; font-size: 11px; }
+.open-work,
+.edit-work { font-size: 10px; }
+.circle-button { width: 30px; height: 30px; border-radius: 50% !important; }
+.circle-button.saved { background: var(--electric); border-color: var(--electric); }
+
+/* La vista espansa resta un campo di lettura: nessuna tessera illuminata. */
+.home-expanded-list { gap: 25px; padding: 38px 12px 22px; }
+.home-expanded-card { position: relative; isolation: isolate; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.home-expanded-card::before { position: absolute; z-index: 0; inset: 0; pointer-events: none; clip-path: var(--paper-sheet-outline); background: radial-gradient(ellipse 58% 74% at 50% 47%, rgba(255,255,255,.16), transparent 76%), linear-gradient(135deg, rgba(255,255,255,.08), transparent 48%, rgba(89,56,29,.08)), var(--book-paper); -webkit-mask-image: radial-gradient(ellipse 96% 94% at 50% 50%, #000 48%, rgba(0,0,0,.93) 70%, transparent 100%); mask-image: radial-gradient(ellipse 96% 94% at 50% 50%, #000 48%, rgba(0,0,0,.93) 70%, transparent 100%); filter: url("#poetek-paper-warp") drop-shadow(0 16px 15px rgba(0,0,0,.34)); transform: perspective(960px) rotateX(.65deg) scaleY(.988); transform-origin: center; content: ""; }
+.home-expanded-card::after { display: none; }
+.home-expanded-card:hover,
+.home-expanded-card:focus-visible { border-color: transparent; transform: translateY(-2px); box-shadow: none; }
+.home-expanded-copy,
+.home-expanded-media { position: relative; z-index: 1; }
+.home-expanded-media { border-radius: 0; clip-path: var(--paper-sheet-outline); box-shadow: none; -webkit-mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 52%, rgba(0,0,0,.9) 74%, transparent 100%); mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 52%, rgba(0,0,0,.9) 74%, transparent 100%); filter: url("#poetek-paper-warp") drop-shadow(0 16px 15px rgba(0,0,0,.34)); }
+
+/* Superficie materiale: una maschera SVG curva definisce il foglio, mentre
+   l'anello scuro nel secondo SVG ne mostra il bordo ripiegato sotto il piano.
+   Le parole restano nel DOM, completamente estranee alla deformazione. */
+.rail-card.card-presentation--text::before,
+.collection-rail-card.card-presentation--text::before,
+.author-rail-card::before,
+.poem-card.card-presentation--text::before,
+.author-profile-card::before,
+.home-expanded-card::before {
+  clip-path: none;
+  -webkit-mask: url("assets/paper-suction-mask.svg") center / 100% 100% no-repeat;
+  mask: url("assets/paper-suction-mask.svg") center / 100% 100% no-repeat;
+  background: url("assets/paper-suction-surface.svg") center / 100% 100% no-repeat,
+    radial-gradient(ellipse 62% 78% at 50% 47%, rgba(255,255,255,.14), transparent 78%),
+    linear-gradient(135deg, rgba(255,255,255,.1), transparent 48%, rgba(89,56,29,.08)),
+    var(--card-background, var(--book-paper));
+  filter: url("#poetek-paper-warp") drop-shadow(0 16px 17px rgba(0,0,0,.42));
+  transform: perspective(1080px) rotateX(.9deg) scaleY(.982);
+  transition: transform .34s cubic-bezier(.2,.75,.2,1), filter .34s ease;
+}
+
+.rail-card.card-presentation--image-text .card-image,
+.collection-rail-card.card-presentation--image-text .card-image,
+.poem-card.card-presentation--image-text .card-image,
+.home-expanded-media {
+  clip-path: none;
+  -webkit-mask: url("assets/paper-suction-mask.svg") center / 100% 100% no-repeat;
+  mask: url("assets/paper-suction-mask.svg") center / 100% 100% no-repeat;
+  filter: url("#poetek-paper-warp") drop-shadow(0 16px 17px rgba(0,0,0,.42));
+  transform: perspective(1080px) rotateX(.9deg) scaleY(.982);
+  transform-origin: center;
+  transition: transform .34s cubic-bezier(.2,.75,.2,1), filter .34s ease;
+}
+
+.card-presentation--image-text::before {
+  clip-path: none;
+  -webkit-mask: url("assets/paper-suction-mask.svg") center / 100% 100% no-repeat;
+  mask: url("assets/paper-suction-mask.svg") center / 100% 100% no-repeat;
+  background: url("assets/paper-suction-surface.svg") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(7,8,12,.24) 0%, rgba(7,8,12,.1) 34%, rgba(7,8,12,.72) 100%);
+  filter: url("#poetek-paper-warp");
+}
+
+.rail-card,
+.home-poem-card,
+.author-rail-card,
+.collection-rail-card,
+.poem-card,
+.author-profile-card,
+.home-expanded-card,
+.rail-card:hover,
+.home-poem-card:hover,
+.author-rail-card:hover,
+.collection-rail-card:hover,
+.poem-card:hover,
+.author-profile-card:hover,
+.home-expanded-card:hover { transform: none; }
+
+.rail-card:hover.card-presentation--text::before,
+.collection-rail-card:hover.card-presentation--text::before,
+.author-rail-card:hover::before,
+.poem-card:hover.card-presentation--text::before,
+.author-profile-card:hover::before,
+.home-expanded-card:hover::before {
+  filter: url("#poetek-paper-warp") drop-shadow(0 20px 20px rgba(0,0,0,.5));
+  transform: perspective(1080px) rotateX(1.35deg) scaleY(.972);
+}
+
+.rail-card:hover.card-presentation--image-text .card-image,
+.collection-rail-card:hover.card-presentation--image-text .card-image,
+.poem-card:hover.card-presentation--image-text .card-image,
+.home-expanded-card:hover .home-expanded-media {
+  filter: url("#poetek-paper-warp") drop-shadow(0 20px 20px rgba(0,0,0,.5));
+  transform: perspective(1080px) rotateX(1.35deg) scaleY(.972);
+}
+
+/* Ripiego sicuro: il browser locale non supporta in modo affidabile la
+   maschera SVG esterna. Si torna a una carta pienamente visibile, mantenendo
+   il bordo concavo e la deformazione solo sul supporto. */
+.rail-card.card-presentation--text::before,
+.collection-rail-card.card-presentation--text::before,
+.author-rail-card::before,
+.poem-card.card-presentation--text::before,
+.author-profile-card::before,
+.home-expanded-card::before {
+  clip-path: var(--paper-sheet-outline);
+  -webkit-mask: none;
+  mask: none;
+  -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 48%, rgba(122,86,43,.06)), var(--card-background, var(--book-paper));
+}
+.home-expanded-card::before {
+  -webkit-mask-image: radial-gradient(ellipse 96% 94% at 50% 50%, #000 48%, rgba(0,0,0,.93) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse 96% 94% at 50% 50%, #000 48%, rgba(0,0,0,.93) 70%, transparent 100%);
+  background: radial-gradient(ellipse 58% 74% at 50% 47%, rgba(255,255,255,.16), transparent 76%), linear-gradient(135deg, rgba(255,255,255,.08), transparent 48%, rgba(89,56,29,.08)), var(--book-paper);
+}
+.rail-card.card-presentation--image-text .card-image,
+.collection-rail-card.card-presentation--image-text .card-image,
+.poem-card.card-presentation--image-text .card-image,
+.home-expanded-media {
+  clip-path: var(--paper-sheet-outline);
+  -webkit-mask: none;
+  mask: none;
+  -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%);
+}
+.home-expanded-media {
+  -webkit-mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 52%, rgba(0,0,0,.9) 74%, transparent 100%);
+  mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 52%, rgba(0,0,0,.9) 74%, transparent 100%);
+}
+.card-presentation--image-text::before {
+  clip-path: var(--paper-sheet-outline);
+  -webkit-mask: none;
+  mask: none;
+  -webkit-mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 91% 87% at 50% 50%, #000 46%, rgba(0,0,0,.93) 68%, transparent 100%);
+  background: linear-gradient(180deg, rgba(7,8,12,.26) 0%, rgba(7,8,12,.14) 34%, rgba(7,8,12,.72) 100%);
+}
+
+/* Renderer canvas: il supporto ha una vera geometria curva; il contenuto
+   tipografico resta un livello HTML separato e stabile. */
+.paper-suction-renderer {
+  position: absolute !important;
+  z-index: 0 !important;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+.paper-rendered { position: relative; isolation: isolate; }
+.paper-suction-renderer--image { z-index: 1 !important; }
+.paper-rendered.rail-card::before,
+.paper-rendered.home-poem-card::before,
+.paper-rendered.author-rail-card::before,
+.paper-rendered.collection-rail-card::before,
+.paper-rendered.poem-card::before,
+.paper-rendered.author-profile-card::before,
+.paper-rendered.home-expanded-card::before,
+.paper-rendered.card-presentation--image-text::before { display: none !important; }
+.paper-rendered .card-image,
+.paper-rendered .home-expanded-media {
+  clip-path: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+.paper-rendered .home-expanded-media { border-radius: 0; }
+.paper-rendered:hover { transform: none !important; }
+
+.library-header,
+.profile-header,
+.publish-header,
+.collection-header { border-bottom-color: var(--line-strong); }
+.library-empty { max-width: none; padding: 41px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--paper); }
+.library-empty h2 { font: 500 clamp(36px, 4vw, 58px)/.9 var(--serif); }
+.library-empty p { color: var(--paper-dim); }
+.library-empty .primary-button { background: var(--paper); color: var(--ink); }
+
+.profile-portrait { border-radius: 0; box-shadow: none; }
+.profile-popular,
+.profile-catalogue { border-top-color: var(--line); }
+.profile-list-open-target { border-radius: 0; background: transparent; }
+.profile-list-open-target:hover,
+.profile-list-open-target:focus-visible { border-color: var(--electric); background: rgba(239,235,226,.06); transform: none; }
+.profile-list-edit,
+.profile-name-controls button,
+.profile-follow-button { border-radius: 0; border-color: rgba(212,154,120,.62); background: transparent; color: var(--electric); }
+
+.collection-index { border-radius: 0; border-color: rgba(32,29,24,.2); box-shadow: none; }
+.collection-index button:hover { background: rgba(212,154,120,.16); }
+.collection-manager-actions button,
+.collection-manager-actions button:first-child { border-radius: 0; border-color: var(--line-strong); color: var(--paper); }
+
+.reader-stage { border-radius: 0; border-color: var(--line-strong); box-shadow: none; background: #171511; }
+.reader-aside { background: #171511; }
+.reader-aside h3 { color: var(--electric); }
+.library-save { border-radius: 0 !important; background: var(--paper); color: var(--ink); }
+.reader-edit { border-radius: 0; }
+
+.publish-paper { border-radius: 0; box-shadow: none; }
+.publish-aside { border-radius: 0; background: transparent; }
+.publish-aside h2 { color: var(--electric); }
+.primary-button,
+.secondary-button { border-radius: 0; }
+
+@media (max-width: 900px) {
+  .main-stage { padding: 0 34px; }
+  .home-rail { grid-auto-columns: minmax(260px, 48vw); overflow-x: auto; border: 0; }
+  .home-path { min-height: 166px; }
+}
+
+@media (max-width: 1280px) {
+  .home-intro-description { display: block; }
+  .home-intro-description > p { white-space: normal; }
+  .project-about { display: block; margin-top: 14px; }
+}
+
+@media (max-width: 610px) {
+  .main-stage { padding: 0 17px; }
+  .topbar-title { font-size: 10px; }
+  .home-page { padding-top: 37px; }
+  .home-intro { padding-bottom: 32px; }
+  .home-intro-main h1 { margin-top: 18px; font-size: clamp(47px, 12vw, 64px); }
+  .home-intro-description { display: block; margin-top: 22px; }
+  .home-paths { grid-template-columns: 1fr; }
+  .home-path,
+  .home-path + .home-path { min-height: 105px; padding: 17px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .home-path:last-child { border-bottom: 0; }
+  .home-path-copy { grid-template-columns: minmax(0, 1fr) minmax(120px, .7fr); align-items: baseline; gap: 14px; }
+  .home-path-copy strong { font-size: 29px; }
+  .home-path-copy small { font-size: 10px; }
+  .home-section-heading { display: flex; }
+  .section-heading-actions { margin: 0; justify-content: flex-end; }
+  .home-section { padding-top: 43px; }
+  .home-rail { grid-auto-columns: minmax(254px, 77vw); }
+  .rail-card,
+  .home-poem-card,
+  .author-rail-card,
+  .collection-rail-card { min-height: 224px; }
+  .home-poem-card .home-attack,
+  .rail-card h3,
+  .collection-rail-card h3 { font-size: 29px; }
+  .poem-card-grid,
+  .saved-grid,
+  .author-card-grid { grid-template-columns: 1fr; border: 0; }
+  .poem-card,
+  .author-profile-card { min-height: 226px; }
+  .catalogue-intro { font-size: 17px; }
+  .search-area input { font-size: 16px; }
+  .home-expanded-card,
+  .home-expanded-card--with-media { border-radius: 0; }
+}
+
+/* Superficie WebGL delle locandine.
+   La misura è una costante visiva: una sezione con due opere non dilata
+   le sue schede per riempire artificialmente lo spazio rimasto. */
+:root { --poetek-tile-size: clamp(198px, 14.2vw, 228px); }
+
+.rail,
+.home-rail,
+.home-author-rail {
+  grid-auto-columns: var(--poetek-tile-size) !important;
+  grid-auto-rows: var(--poetek-tile-size);
+  gap: clamp(26px, 2.2vw, 40px) !important;
+  justify-content: start;
+  align-items: start;
+}
+
+.rail-card,
+.home-poem-card,
+.author-rail-card,
+.collection-rail-card,
+.poem-card,
+.author-profile-card,
+.home-expanded-card {
+  min-height: 0 !important;
+  aspect-ratio: 1;
+  padding: 17px 18px 23px !important;
+}
+
+.poem-card-grid,
+.saved-grid,
+.author-card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(var(--poetek-tile-size), var(--poetek-tile-size))) !important;
+  gap: clamp(26px, 2.2vw, 40px) !important;
+  justify-content: start;
+}
+
+.mesh-paper-rendered {
+  position: relative;
+  isolation: isolate;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.mesh-paper-rendered::before,
+.mesh-paper-rendered::after { display: none !important; }
+
+.poetek-paper-mesh {
+  position: absolute !important;
+  z-index: 0 !important;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+
+.mesh-paper-rendered > :not(.poetek-paper-mesh):not(.card-click-target) {
+  position: relative;
+  z-index: 2;
+}
+
+.mesh-paper-rendered > .card-click-target { z-index: 1; }
+
+/* Base di sicurezza: se un contesto WebGL viene sospeso dal browser durante
+   lo scorrimento, la carta non scompare mai nel nero. La mesh la ricopre
+   quando è attiva; questa superficie resta visibile solo attraverso i bordi. */
+.mesh-paper-rendered::before {
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 5px !important;
+  display: block !important;
+  border-radius: 28px !important;
+  background:
+    radial-gradient(ellipse 70% 68% at 50% 45%, rgba(255,255,255,.14), transparent 76%),
+    var(--card-background, var(--book-paper)) !important;
+  box-shadow: 0 11px 22px rgba(0,0,0,.28) !important;
+  content: "" !important;
+}
+
+.poetek-paper-mesh { z-index: 1 !important; }
+
+.mesh-paper-rendered > .card-click-target { z-index: 3; }
+
+.mesh-paper-rendered .card-image {
+  z-index: 0 !important;
+  opacity: 1 !important;
+  border-radius: 28px !important;
+  clip-path: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.home-poem-card .home-attack,
+.poem-card .poem-card-lead,
+.rail-card h3,
+.collection-rail-card h3 {
+  max-width: 100%;
+  font-size: clamp(20px, 1.35vw, 25px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.032em !important;
+}
+
+.author-rail-card .author-rail-name {
+  font-size: clamp(20px, 1.32vw, 24px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.04em !important;
+}
+
+@media (max-width: 900px) {
+  :root { --poetek-tile-size: min(34vw, 228px); }
+}
+
+@media (max-width: 610px) {
+  :root { --poetek-tile-size: min(60vw, 228px); }
+  .poem-card-grid,
+  .saved-grid,
+  .author-card-grid { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+/* Forma finale delle locandine.
+   Le prove precedenti usavano clip-path e maschere concave: quelle regole
+   possono riaffiorare quando una superficie WebGL viene montata durante lo
+   scorrimento. Qui la geometria viene dichiarata una sola volta, con una
+   sagoma quadrata morbida e identica sia con sia senza renderer attivo. */
+.rail-card,
+.home-poem-card,
+.author-rail-card,
+.collection-rail-card,
+.poem-card,
+.author-profile-card {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  clip-path: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.rail-card::before,
+.home-poem-card::before,
+.author-rail-card::before,
+.collection-rail-card::before,
+.poem-card::before,
+.author-profile-card::before,
+.home-expanded-card::before {
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 5px !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  border-radius: 28px !important;
+  clip-path: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  background:
+    radial-gradient(ellipse 72% 68% at 50% 44%, rgba(255,255,255,.13), transparent 76%),
+    linear-gradient(145deg, rgba(255,250,235,.08), rgba(99,78,48,.035)),
+    var(--card-background, var(--book-paper)) !important;
+  box-shadow: 0 11px 22px rgba(0,0,0,.28) !important;
+  filter: none !important;
+  transform: none !important;
+  pointer-events: none !important;
+  content: "" !important;
+}
+
+.rail-card::after,
+.home-poem-card::after,
+.author-rail-card::after,
+.collection-rail-card::after,
+.poem-card::after,
+.author-profile-card::after,
+.home-expanded-card::after {
+  display: none !important;
+  content: none !important;
+}
+
+.rail-card.card-presentation--image-text .card-image,
+.collection-rail-card.card-presentation--image-text .card-image,
+.poem-card.card-presentation--image-text .card-image {
+  clip-path: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: none !important;
+  transform: none !important;
+  border-radius: 28px !important;
+}
+
+.home-expanded-media,
+.paper-rendered .home-expanded-media {
+  clip-path: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: none !important;
+  transform: none !important;
+  border-radius: 22px !important;
+}
+
+.home-expanded-card {
+  width: 100% !important;
+  min-height: 330px !important;
+  aspect-ratio: auto !important;
+  padding: clamp(23px, 4vw, 43px) !important;
+}
+
+.rail-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.card-image),
+.home-poem-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.card-image),
+.author-rail-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.card-image),
+.collection-rail-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.card-image),
+.poem-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.card-image),
+.author-profile-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.card-image),
+.home-expanded-card > :not(.poetek-paper-mesh):not(.card-click-target):not(.home-expanded-media) {
+  position: relative;
+  z-index: 2;
+}
+
+.rail-card > .card-click-target,
+.home-poem-card > .card-click-target,
+.author-rail-card > .card-click-target,
+.collection-rail-card > .card-click-target,
+.poem-card > .card-click-target,
+.author-profile-card > .card-click-target { z-index: 3; }
+
+@media (max-width: 610px) {
+  .home-expanded-card,
+  .home-expanded-card--with-media {
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    padding: 22px 19px !important;
+  }
+}
+
+/* La griglia stabilisce la posizione; la scheda stabilisce la propria
+   misura. Questo evita che alcune tessere vengano allargate dal contenuto o
+   da un canvas montato dopo lo scroll. */
+.rail > .rail-card,
+.rail > .home-poem-card,
+.rail > .author-rail-card,
+.rail > .collection-rail-card,
+.poem-card-grid > .poem-card,
+.saved-grid > .poem-card,
+.author-card-grid > .author-profile-card {
+  inline-size: var(--poetek-tile-size) !important;
+  block-size: var(--poetek-tile-size) !important;
+  min-inline-size: var(--poetek-tile-size) !important;
+  max-inline-size: var(--poetek-tile-size) !important;
+  min-block-size: var(--poetek-tile-size) !important;
+  max-block-size: var(--poetek-tile-size) !important;
+}
+
+/* Il testo apre la pagina dall'alto: il piede della scheda resta in basso,
+   mentre titolo o attacco hanno una presenza più editoriale e meno centrata. */
+.home-poem-card .home-attack:not(.card-caption--free),
+.poem-card .poem-card-lead:not(.card-caption--free),
+.rail-card h3:not(.card-caption--free),
+.collection-rail-card h3:not(.card-caption--free) {
+  /* Il blocco di testo si posa circa a un terzo della pagina, non sul bordo. */
+  margin: calc(var(--poetek-tile-size) * .22) 0 0 !important;
+  align-self: flex-start;
+}
+
+.collection-rail-card .collection-rail-open {
+  margin-top: auto;
+}
+
+/* Autore e titolo formano un unico blocco di lettura; l'azione resta
+   deliberatamente isolata nel piede, come nelle schede degli autori. */
+.home-poem-card {
+  justify-content: flex-start !important;
+}
+
+.home-poem-card .home-poem-byline {
+  margin: 7px 0 0 !important;
+  color: #716b62 !important;
+  font: 11px/1.2 var(--sans);
+}
+
+.home-poem-card > .home-open {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.home-poem-card.card-presentation--light .home-poem-byline {
+  color: rgba(255,255,255,.8) !important;
+}
+
+.home-poem-card.card-presentation--image-text.card-presentation--dark .home-poem-byline {
+  color: #303137 !important;
+}
+
+/* I nomi propri restano in forma naturale: il maiuscolo è riservato alle
+   micro-etichette funzionali, non alle voci degli autori. */
+.home-poem-byline,
+.card-author,
+.author-rail-name,
+.author-profile-name,
+.collection-rail-card p,
+.home-expanded-footer > span:first-child {
+  text-transform: none !important;
+}
+
+/* Profilo: il monogramma è un vero segnaposto, centrato e leggibile prima
+   dell'aggiunta di una fotografia. */
+.profile-portrait--placeholder {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+}
+
+.profile-portrait--placeholder strong {
+  position: absolute;
+  inset: 44px 18px 42px;
+  display: grid;
+  place-items: center;
+  max-width: none;
+  overflow: visible;
+  margin: 0;
+  font-size: clamp(54px, 5.4vw, 76px);
+  line-height: 1;
+  letter-spacing: -.075em;
+  text-align: center;
+}
+
+/* Le due aree editoriali hanno una gerarchia esplicita: etichetta, titolo,
+   poi contenuto. Il blocco non può più sovrapporsi quando cambia la larghezza. */
+.profile-popular .section-heading-line,
+.profile-catalogue .section-heading-line {
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.profile-popular .section-heading-line > div,
+.profile-catalogue .section-heading-line > div {
+  display: grid;
+  gap: 9px;
+  align-items: start;
+}
+
+.profile-popular .section-heading-line .kicker,
+.profile-catalogue .section-heading-line .kicker {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.profile-popular .section-heading-line .section-title,
+.profile-catalogue .section-heading-line .section-title {
+  margin: 0;
+  font-size: clamp(29px, 2.25vw, 38px);
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.profile-popular .section-heading-line .works-total,
+.profile-catalogue .section-heading-line .works-total {
+  margin-top: 22px;
+}
+
+@media (max-width: 620px) {
+  .profile-portrait--placeholder strong {
+    font-size: 62px;
+  }
+
+  .profile-popular .section-heading-line,
+  .profile-catalogue .section-heading-line {
+    gap: 12px;
+  }
+
+  .profile-popular .section-heading-line .works-total,
+  .profile-catalogue .section-heading-line .works-total {
+    margin-top: 5px;
+  }
+}
+
+/* Rifinitura editoriale — 30 luglio 2026
+   L'SVG contiene soltanto definizioni di filtro: fuori dal flusso non crea
+   spazio sopra la testata. */
+.paper-filter-definitions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.topbar-title {
+  color: #d8d0c4;
+  font-weight: 500;
+  line-height: 1.35;
+  text-rendering: geometricPrecision;
+}
+
+/* Chi siamo: un'unica dichiarazione, ariosa e senza blocchi promozionali. */
+.about-page {
+  max-width: 1180px;
+  padding: clamp(48px, 6.5vw, 92px) 0 96px;
+}
+
+.about-header {
+  padding-bottom: clamp(22px, 3vw, 34px);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+/* Il testo comincia dove comincia "Poetek / Chi siamo". C'era un rientro
+   che si sommava alla larghezza piena: su tablet verticale la somma
+   superava la colonna e le righe uscivano dallo schermo a destra. */
+.about-statement {
+  width: min(900px, 100%);
+  padding: clamp(34px, 4.5vw, 60px) 0 0;
+  display: grid;
+  gap: clamp(25px, 3vw, 38px);
+}
+
+.about-statement p {
+  max-width: 46em;
+  margin: 0;
+  color: var(--paper-dim);
+  font: 400 clamp(19px, 1.55vw, 24px)/1.54 var(--serif);
+  letter-spacing: -.012em;
+}
+
+.about-statement .about-opening {
+  max-width: 34em;
+  color: var(--paper);
+  font-size: clamp(24px, 2.25vw, 35px);
+  line-height: 1.3;
+  letter-spacing: -.035em;
+}
+
+.about-statement .about-closing {
+  max-width: 34em;
+  padding-top: clamp(22px, 2.5vw, 30px);
+  border-top: 1px solid var(--line);
+  color: var(--paper);
+}
+
+@media (max-width: 610px) {
+  .topbar-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: visible;
+    font-size: 9px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .about-page {
+    padding: 34px 0 68px;
+  }
+
+  .about-header {
+    padding-bottom: 19px;
+  }
+
+  .about-statement {
+    padding-top: 29px;
+    gap: 24px;
+  }
+
+  .about-statement p {
+    font-size: 18px;
+    line-height: 1.52;
+  }
+
+  .about-statement .about-opening {
+    font-size: clamp(22px, 6.2vw, 27px);
+    line-height: 1.32;
+  }
+
+  .about-statement .about-closing {
+    padding-top: 22px;
+  }
+
+  /* Tutte le schede della home condividono la stessa misura compatta. */
+  .home-page .home-rail {
+    --poetek-tile-size: min(55vw, 212px);
+  }
+
+  .home-page .home-rail .home-poem-card .home-attack,
+  .home-page .home-rail .collection-rail-card h3 {
+    font-size: 19px !important;
+  }
+}
+
+
+/* Public beta access cue: aligned below the access control. */
+.topbar-access-note {
+  min-height: 106px;
+  justify-content: flex-end;
+  padding: 20px 0 0;
+}
+
+.topbar-access-note p {
+  width: min(560px, calc(100% - 180px));
+  margin: 0 110px 0 0;
+  color: var(--paper);
+  font: 400 14px/1.48 var(--sans);
+  letter-spacing: .002em;
+  text-align: left;
+}
+
+
+/* Access note: compact callout, anchored below the access arrow without taking layout height. */
+.topbar-access-note {
+  display: block;
+  position: relative;
+  min-height: 0;
+  height: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.topbar-access-note p {
+  position: absolute;
+  top: 16px;
+  right: calc(var(--access-button-half) - 8px);
+  width: min(302px, calc(100% - 64px));
+  margin: 0;
+  color: var(--paper);
+  font: 400 12px/1.45 var(--sans);
+  letter-spacing: .002em;
+  text-align: left;
+}
+
+/* Access gates: compact editorial layout. */
+.public-access-page .library-header { max-width: 920px; padding-bottom: 25px; }
+.public-access-page .library-header .display { font-size: clamp(42px, 3.45vw, 60px); letter-spacing: -.055em; }
+.public-access-page .library-content { max-width: 760px; padding-top: 31px; }
+.public-access-page .library-empty { max-width: 620px; padding: 26px 0 39px; }
+.public-access-page .library-empty h2 { margin-bottom: 13px; font: 500 clamp(31px, 2.55vw, 45px)/.97 var(--serif); letter-spacing: -.055em; }
+.public-access-page .library-empty p { max-width: 530px; margin-bottom: 20px; font-size: 15px; line-height: 1.55; }
+.public-access-page .public-access-actions { margin-top: 0; }
+
+/* Rifiniture di navigazione e ritmo della home — 28 luglio 2026 */
+.side-nav a[href="#chi-siamo"],
+.side-link[data-route="about"] {
+  order: 99;
+}
+
+.project-about,
+.project-about:link,
+.project-about:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0 0 3px;
+  border: 0;
+  border-bottom: 1px solid rgba(212, 154, 120, .72);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--electric);
+  text-decoration: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font: 10px/1.3 var(--mono);
+  letter-spacing: .045em;
+  cursor: pointer;
+}
+
+.project-about:hover,
+.project-about:focus-visible {
+  background: transparent;
+  color: var(--paper);
+  border-bottom-color: var(--paper);
+  outline: none;
+}
+
+.project-about span {
+  font: 15px/1 var(--serif);
+}
+
+@media (max-width: 610px) {
+  .home-section + .home-section {
+    padding-top: 43px;
+  }
+
+  .topbar-access:not([hidden]) {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .side-rail {
+    left: 0 !important;
+    right: auto !important;
+    align-items: stretch !important;
+  }
+
+  .side-nav {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+    justify-items: start !important;
+    align-items: stretch !important;
+  }
+
+  .side-link {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+/* Audit mobile V2 — 29 luglio 2026
+   Isolato al breakpoint: non modifica dati, autenticazione o routing. */
+@media (max-width: 610px) {
+  /* Menu laterale: una colonna realmente allineata a sinistra. */
+  .side-rail {
+    width: min(78vw, 292px) !important;
+    padding: 28px 22px 22px !important;
+    box-sizing: border-box !important;
+  }
+
+  .side-nav {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-content: start !important;
+    justify-items: stretch !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    margin: 48px 0 0 !important;
+    text-align: left !important;
+  }
+
+  .side-nav .side-link {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  /* Ricerca: il placeholder resta interamente leggibile. */
+  .discover-page .search-area {
+    height: 54px;
+  }
+
+  .discover-page .search-area input {
+    padding: 0 8px 0 36px;
+    font-size: 13px;
+    letter-spacing: -0.018em;
+  }
+
+  .discover-page .search-icon {
+    left: 14px;
+    font-size: 18px;
+  }
+
+  /* Catalogo: due schede proporzionate, non una colonna di poster. */
+  .discover-page .poem-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .discover-page .poem-card-grid .poem-card {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    padding: 13px 12px 14px !important;
+  }
+
+  .discover-page .poem-card-grid .poem-card-lead {
+    font-size: 17px !important;
+    line-height: 1.02 !important;
+  }
+
+  .discover-page .poem-card-grid .card-author,
+  .discover-page .poem-card-grid .small-tag,
+  .discover-page .poem-card-grid .open-work {
+    font-size: 10px !important;
+  }
+
+  .discover-page .poem-card-grid .circle-button {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+
+  .discover-page .poem-card-grid .card-bottom {
+    gap: 6px;
+  }
+
+  /* Pubblica: stessa gerarchia, ritmo più compatto sul telefono. */
+  .public-access-page {
+    padding-top: 31px;
+    padding-bottom: 52px;
+  }
+
+  .public-access-page .library-header {
+    padding-bottom: 18px;
+  }
+
+  .public-access-page .library-content {
+    padding-top: 20px;
+  }
+
+  .public-access-page .library-empty {
+    padding: 20px 0 30px;
+  }
+
+  .public-access-page .library-empty h2 {
+    max-width: 15ch;
+    font-size: clamp(28px, 8vw, 32px);
+    line-height: 0.98;
+  }
+
+  .public-access-page .library-empty p {
+    max-width: 31ch;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .public-access-page .primary-button {
+    min-height: 42px;
+    padding-inline: 18px;
+  }
+}
+
+
+/* Catalogo mobile: ogni scheda resta nella propria colonna. */
+@media (max-width: 610px) {
+  .discover-page .poem-card-grid > .poem-card {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+
+
+/* Mobile catalog: keep collection labels and actions contained inside two-column cards. */
+@media (max-width: 620px) {
+  .discover-page .poem-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    padding: 13px 12px 14px !important;
+    overflow: hidden !important;
+    contain: layout paint !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .poem-card-lead {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    margin: 22% 0 8px !important;
+    font-size: clamp(16px, 4.7vw, 19px) !important;
+    line-height: 1.03 !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 3 !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .card-bottom {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: auto !important;
+    overflow: hidden !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .card-identity {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .card-author {
+    margin: 0 0 4px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .tag-stack {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    min-width: 0 !important;
+    margin-top: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .small-tag {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding: 4px 6px !important;
+    font-size: 8px !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .card-actions {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-end !important;
+    gap: 5px !important;
+    margin-left: auto !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .open-work {
+    padding: 5px 0 !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .discover-page .poem-card-grid > .poem-card .circle-button {
+    flex: 0 0 28px !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Elenchi di opere
+   La scheda lascia il posto alla riga, ma ne conserva la materia:
+   la stessa carta delle locandine, ora in forma di barra.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* La riga non ha campitura: a riposo è solo il filo che la separa.
+     Questi valori vestono il testo e i comandi che ci stanno sopra. */
+  --row-fg: #efebe2;
+  --row-fg-soft: #a8a6a2;
+  --row-edge: rgba(239, 235, 226, .16);
+  --row-accent: #d49a78;
+
+  /* L'anteprima resta carta: aprendola, la poesia si accende. */
+  --prev-paper: #e8ddc5;
+  --prev-ink: #201d18;
+  --prev-ink-soft: #6b6459;
+  --prev-edge: rgba(32, 29, 24, .22);
+  --prev-accent: #9c6245;
+}
+
+.list-stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 16px; }
+.list-stage.is-previewing { grid-template-columns: minmax(0, 1fr) minmax(0, 360px); }
+
+.work-list { display: flex; flex-direction: column; min-width: 0; }
+
+.work-row {
+  position: relative;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px;
+  padding: 13px 0;
+  background: transparent; color: var(--row-fg);
+  border-bottom: 1px solid var(--line);
+  transition: background .18s ease;
+}
+.work-list > .work-row:first-child { border-top: 1px solid var(--line); }
+/* A riposo nessuna superficie: solo il filo che divide una riga dall'altra.
+   Il rilievo compare al passaggio del mouse, appena accennato. */
+.work-row:hover { background: rgba(239, 235, 226, .035); box-shadow: 0 0 0 10px rgba(239, 235, 226, .035); }
+.work-row.is-previewed { background: rgba(239, 235, 226, .05); box-shadow: 0 0 0 10px rgba(239, 235, 226, .05); }
+/* Il segno della riga aperta sta nel margine: così il titolo resta
+   allineato con le intestazioni di sezione, senza scarti di un pixel. */
+.work-row.is-previewed::before {
+  content: ""; position: absolute; left: -11px; top: 0; bottom: 0;
+  width: 2px; background: var(--row-accent);
+}
+
+.work-row-open { display: grid; gap: 4px; min-width: 0; padding: 0; border: 0; background: none; color: inherit; text-align: left; }
+.work-row-open:focus-visible { outline: 2px solid var(--row-accent); outline-offset: 4px; }
+
+.work-row-name {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  min-width: 0; overflow-wrap: anywhere;
+  color: var(--row-fg); font: 400 18px/1.26 var(--serif); letter-spacing: -.03em;
+}
+/* Una poesia senza titolo si nomina dal proprio primo verso. */
+.work-row-name.is-incipit { font-style: italic; }
+.work-row--collection .work-row-name,
+.work-row--author .work-row-name { font-weight: 500; letter-spacing: -.038em; }
+
+.work-row-meta { color: var(--row-fg-soft); font: 9px/1.35 var(--mono); letter-spacing: .09em; text-transform: uppercase; overflow-wrap: anywhere; }
+
+.work-row-actions { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; }
+
+.work-row-preview,
+.work-row-edit {
+  padding: 6px 11px; border: 1px solid var(--row-edge); background: transparent;
+  color: var(--row-fg-soft); font: 9px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.work-row-preview:hover,
+.work-row-edit:hover { border-color: var(--row-accent); color: var(--row-accent); }
+.work-row-preview[aria-expanded="true"] { border-color: var(--row-accent); background: var(--row-accent); color: #17140f; }
+
+.work-row-save {
+  width: 27px; height: 27px; display: grid; place-items: center; flex: 0 0 auto;
+  border: 1px solid var(--row-edge); background: transparent;
+  color: var(--row-fg-soft); font: 12px/1 var(--mono);
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.work-row-save:hover { border-color: var(--row-accent); color: var(--row-accent); }
+.work-row-save.saved { border-color: var(--row-accent); background: var(--row-accent); color: #17140f; }
+
+.work-row-go { color: var(--row-fg-soft); font: 13px/1 var(--mono); }
+
+/* Il segno compare solo dove la parola non ci sta; altrove vince la parola.
+   Dichiarato qui, prima delle media query, perché sia quello a prevalere. */
+.work-row-occhio { display: none; }
+
+.work-row-preview:focus-visible,
+.work-row-edit:focus-visible,
+.work-row-save:focus-visible { outline: 2px solid var(--row-accent); outline-offset: 2px; }
+
+/* ── Anteprima ─────────────────────────────────────────────
+   Accanto all'elenco sul desktop, sotto la riga sul telefono.
+   In entrambi i casi scorre per conto proprio: né un verso lungo
+   né un'immagine in fondo possono restare fuori dalla vista.
+   ───────────────────────────────────────────────────────── */
+
+.preview-slot { position: sticky; top: 18px; min-width: 0; }
+.preview-slot[hidden] { display: none; }
+
+.preview-card {
+  display: flex; flex-direction: column;
+  max-height: calc(100vh - 36px); overflow-y: auto; overscroll-behavior: contain;
+  padding: 20px 20px 18px; background: var(--prev-paper); color: var(--prev-ink);
+  border-left: 2px solid var(--prev-accent);
+}
+/* Anche sul telefono il foglio scorre da sé: sfogliare l'anteprima non
+   deve trascinare tutta la pagina sotto di essa. */
+.preview-inline .preview-card { max-height: 62vh; }
+
+.preview-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.preview-kicker { margin: 0; color: var(--prev-accent); font: 9px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+.preview-close { padding: 0 5px; border: 0; background: none; color: var(--prev-ink-soft); font: 21px/1 var(--sans); }
+.preview-close:hover { color: var(--prev-ink); }
+
+.preview-name { margin: 13px 0 4px; color: var(--prev-ink); font: 400 19px/1.24 var(--serif); letter-spacing: -.032em; overflow-wrap: anywhere; }
+.preview-name.is-incipit { font-style: italic; }
+.preview-author { margin: 0 0 15px; color: var(--prev-ink-soft); font: 9px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+/* Senza titolo l'autore eredita lo stacco che dava il titolo, altrimenti
+   si appoggerebbe al soprattitolo. */
+.preview-author.senza-titolo { margin-top: 13px; }
+
+.preview-media { margin: 0 0 15px; }
+.preview-media--bottom { margin: 15px 0 0; }
+/* Proporzioni intatte, ma senza che una foto alta spinga i versi fuori vista. */
+.preview-media img { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: 30vh; }
+
+/* Il verso che eccede la colonna va a capo con rientro, come in tipografia:
+   l'occhio riconosce che è la stessa riga e non un verso nuovo. */
+.preview-verse {
+  margin: 0; padding-left: 1.1em; text-indent: -1.1em;
+  color: var(--prev-ink); font: 400 15px/1.6 var(--poem-font, var(--serif));
+  overflow-wrap: break-word; white-space: pre-wrap;
+}
+.preview-gap { display: block; height: 10px; }
+.preview-more { margin: 8px 0 0; color: var(--prev-ink-soft); font: 400 15px/1 var(--serif); }
+
+.preview-actions { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: 17px; padding-top: 14px; border-top: 1px solid var(--prev-edge); }
+.preview-read {
+  padding: 0 0 3px; border: 0; border-bottom: 1px solid var(--prev-accent); background: none;
+  color: var(--prev-accent); font: 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+}
+.preview-read:hover { color: var(--prev-ink); border-bottom-color: var(--prev-ink); }
+
+/* Condividere e' un gesto secondario rispetto al leggere: stesso corpo,
+   ma senza il filo sotto che segnala l'azione principale. */
+.preview-share {
+  padding: 0 0 3px; border: 0; background: none; color: var(--prev-ink-soft);
+  font: 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; cursor: pointer;
+}
+.preview-share:hover { color: var(--prev-ink); }
+.preview-share[disabled] { cursor: default; opacity: .7; }
+
+.reader-share { width: 100%; margin-top: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--paper-dim); font: 11px var(--sans); cursor: pointer; }
+.reader-share:hover { border-color: var(--electric); color: var(--electric); }
+.reader-share[disabled] { cursor: default; opacity: .7; }
+
+/* Sul telefono l'anteprima nasce sotto la riga che l'ha chiamata. */
+.preview-inline { margin: 3px 0; }
+.preview-inline[hidden] { display: none; }
+
+/* ── Suggerimenti di ricerca ────────────────────────────────
+   La memoria delle ricerche si affaccia sotto la barra, come in un
+   qualunque campo di ricerca, invece di occupare la pagina.
+   ─────────────────────────────────────────────────────────── */
+
+.search-area { position: relative; }
+
+.search-suggest {
+  position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 1px);
+  display: flex; flex-direction: column;
+  padding: 6px 0 4px;
+  border: 1px solid var(--line-strong); border-top: 0;
+  background: #1a1712;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, .5);
+}
+.search-suggest[hidden] { display: none; }
+
+.search-suggest-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 9px 18px 11px;
+  color: var(--electric); font: 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+}
+.recent-clear {
+  padding: 0 0 3px; border: 0; border-bottom: 1px solid var(--line-strong); background: none;
+  color: var(--muted); font: 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+}
+.recent-clear:hover { color: var(--electric); border-bottom-color: var(--electric); }
+
+.recent-item {
+  display: flex; align-items: center; gap: 13px;
+  padding: 11px 18px; border: 0; background: transparent;
+  color: var(--paper); font: 400 16px/1.2 var(--serif); letter-spacing: -.02em;
+  text-align: left; overflow-wrap: anywhere;
+  transition: background .16s ease;
+}
+.recent-item:hover { background: rgba(239, 235, 226, .05); }
+.recent-item:focus-visible { outline: 1px solid var(--electric); outline-offset: -2px; }
+.recent-item-icon { color: var(--muted); font: 15px/1 var(--sans); flex: 0 0 auto; }
+
+/* Nel catalogo le sezioni in evidenza cominciano dopo i filtri. */
+.results--evidenza .home-section:first-child { padding-top: 34px; }
+
+/* Qui l'intestazione non è la voce principale della pagina — lo è la barra
+   di ricerca — quindi scende di corpo e le lascia il primo piano. */
+.results--evidenza .home-section-label { font-size: clamp(20px, 1.75vw, 26px); letter-spacing: -.045em; }
+
+
+/* ── Telefono ──────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .list-stage,
+  .list-stage.is-previewing { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .preview-slot { display: none !important; }
+
+  /* I comandi restano accanto al titolo: la riga non deve allungarsi.
+     Testo e cornici si stringono quel tanto che basta a stare in linea. */
+  .work-row { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 0; height: 60px; }
+  /* Altezza costante: il titolo non va mai a capo. Se non ci sta, il corpo
+     viene ridotto da adattaTitoliStretti() fino a un minimo leggibile. */
+  /* Corpo unico per tutte le righe: quando il titolo eccede si taglia
+     con i puntini, invece di rimpicciolirsi riga per riga. */
+  .work-row-name {
+    display: block; font-size: 16px; line-height: 21px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    -webkit-line-clamp: none;
+  }
+  /* Interlinea fissa: il corpo cambia da riga a riga, l'altezza no. */
+  .work-row-meta { line-height: 13px; }
+  .work-row-meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .work-row-actions { gap: 6px; }
+  /* Bersagli comodi per il dito: l'altezza sta dentro quella della riga,
+     quindi la barra non cresce. */
+  .work-row-preview,
+  .work-row-edit { display: grid; place-items: center; min-height: 38px; padding: 0 9px; font-size: 8px; letter-spacing: .06em; }
+  .work-row-save { width: 38px; height: 38px; font-size: 13px; }
+  .work-row--collection .work-row-actions,
+  .work-row--author .work-row-actions { position: static; }
+
+  .preview-card { padding: 18px 16px 16px; }
+  .preview-verse { font-size: 14.5px; }
+}
+
+/* ── Telefono in verticale ──────────────────────────────────
+   Qui la larghezza è merce rara: "Anteprima" diventa un segno,
+   e il titolo guadagna una quindicina di caratteri. In orizzontale,
+   su tavoletta e sul desktop la parola resta per esteso.
+   L'icona è disegnata col CSS: tre righe di testo, nessun glifo
+   che possa mancare nel font.
+   ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 560px) and (orientation: portrait) {
+  .work-row-preview-testo {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  .work-row-preview { padding: 0 11px; }
+  .work-row-occhio { display: block; width: 19px; height: 11px; }
+}
+
+/* Sotto i 380px — la larghezza di buona parte degli Android — l'invito di
+   ricerca sfiorava il bordo e perdeva l'ultima parola. Non rimpicciolisco il
+   testo: recupero lo spazio dal margine della lente e dalla spaziatura fra le
+   lettere, così la frase resta intera e allo stesso corpo delle altre. */
+@media (max-width: 380px) {
+  .discover-page .search-area input {
+    padding: 0 6px 0 30px;
+    letter-spacing: -0.026em;
+  }
+
+  .discover-page .search-icon { left: 10px; }
+}
+
+/* ── Studio di pubblicazione ────────────────────────────────────────── */
+
+/* L'immagine caricata si vede subito, in piccolo, accanto al suo stato:
+   prima bisognava fidarsi di una scritta. */
+.reading-image-preview { display: flex; align-items: center; gap: 13px; }
+.reading-image-preview img { flex: none; width: 66px; height: 66px; border: 1px solid rgba(20,20,24,.18); background: #f1eee7; object-fit: cover; }
+.reading-image-preview .card-image-state { flex-direction: column; align-items: flex-start; gap: 5px; }
+
+/* Le due azioni si adattano alla piu' alta: fissarne l'altezza a mano le
+   avrebbe disallineate al primo cambio di corpo. */
+.publish-actions-buttons { display: flex; align-items: stretch; gap: 10px; }
+.publish-preview-button { padding: 11px 16px; border: 1px solid rgba(20,20,24,.4); background: transparent; color: var(--ink); font-size: 12px; font-weight: 600; cursor: pointer; transition: border-color .18s, background .18s; }
+.publish-preview-button:hover { border-color: var(--ink); background: rgba(20,20,24,.05); }
+
+/* ── Anteprima della pagina di lettura ──────────────────────────────── */
+
+.draft-preview { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: clamp(10px, 3vw, 42px); background: rgba(6,7,11,.86); }
+.draft-preview-panel { display: flex; flex-direction: column; width: min(100%, 1060px); max-height: 100%; border: 1px solid var(--line-strong); background: var(--void); }
+.draft-preview-top { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 15px; border-bottom: 1px solid var(--line); }
+.draft-preview-top .kicker { margin: 0; }
+.draft-preview-close { padding: 0 5px; border: 0; background: transparent; color: var(--paper-dim); font: 400 23px/1 var(--sans); cursor: pointer; }
+.draft-preview-close:hover { color: var(--paper); }
+/* Scorre il foglio, non la pagina che gli sta sotto. */
+.draft-preview-scroll { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.draft-preview-vuota { margin: clamp(40px, 6vw, 74px) 0 0; color: #77756f; font: 400 15px/1.5 var(--serif); }
+body.anteprima-bozza-aperta { overflow: hidden; }
+
+@media (max-width: 610px) {
+  /* Il tasto di caricamento stava in fondo a destra, incollato alla riga
+     del campo precedente, e l'invito a scrivere se ne andava per conto suo:
+     ora scendono in colonna nell'ordine in cui si leggono. */
+  .publish-paper .file-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .publish-paper .file-row .file-import { margin-top: 2px; }
+  .publish-paper .file-hint { margin: 14px 0 4px; }
+
+  .publish-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .publish-actions-buttons { width: 100%; }
+  .publish-actions-buttons > * { flex: 1 1 0; text-align: center; }
+}
+
+/* La riga dei campi sopra non e' un publish-block, quindi la regola di
+   distanza fra blocchi non la vedeva e "Testo" finiva appoggiato al filo
+   dell'ultimo campo. */
+.publish-fields + .publish-block { margin-top: 34px; }
+
+/* Un verso e' lungo quanto l'autore lo ha scritto: mandarlo a capo da solo
+   ne inventerebbe uno che non esiste. La casella non impagina piu', scorre
+   di lato -- esattamente come fa la pagina di lettura. */
+.publish-text-block textarea { overflow-x: auto; white-space: pre; overflow-wrap: normal; scrollbar-width: thin; scrollbar-color: rgba(30,30,34,.28) transparent; }
+
+/* ── Foglio di condivisione ─────────────────────────────────────────── */
+
+.share-sheet { position: fixed; inset: 0; z-index: 65; display: flex; align-items: center; justify-content: center; padding: clamp(12px, 4vw, 40px); background: rgba(6,7,11,.86); }
+.share-sheet-panel { display: flex; flex-direction: column; gap: 14px; width: min(100%, 360px); max-height: 100%; padding: 15px; overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--line-strong); background: var(--void); }
+.share-sheet-top { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 14px; }
+.share-sheet-top .kicker { margin: 0; }
+.share-sheet-close { padding: 0 4px; border: 0; background: none; color: var(--paper-dim); font: 400 22px/1 var(--sans); cursor: pointer; }
+.share-sheet-close:hover { color: var(--paper); }
+
+/* L'immagine e' alta il doppio che larga: si mostra intera, non ritagliata. */
+.share-sheet-immagine { display: block; width: 100%; max-height: 46vh; object-fit: contain; background: rgba(255,255,255,.04); }
+
+.share-sheet-carte { display: flex; gap: 8px; }
+.share-sheet-carta { display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid var(--line); background: transparent; color: var(--paper-dim); font: 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+.share-sheet-carta:hover { border-color: var(--line-strong); color: var(--paper); }
+.share-sheet-carta.attiva { border-color: var(--electric); color: var(--paper); }
+.share-sheet-pastiglia { width: 13px; height: 13px; flex: none; border: 1px solid rgba(239,235,226,.35); border-radius: 50%; }
+
+.share-sheet-azione { padding: 12px; border: 0; background: var(--paper); color: var(--ink); font: 600 12px var(--sans); cursor: pointer; }
+.share-sheet-azione[disabled] { cursor: default; opacity: .75; }
+.share-sheet-nota { margin: 0; color: var(--paper-dim); font-size: 11px; line-height: 1.45; }
+.share-sheet-nota strong { color: var(--paper); }
+
+body.condivisione-aperta { overflow: hidden; }
+
+/* La nota sotto l'etichetta dice quale delle due conviene, senza imporla. */
+.share-sheet-carta { flex-direction: column; align-items: flex-start; gap: 3px; }
+.share-sheet-carta em { color: var(--paper-dim); font: 9px/1 var(--mono); font-style: normal; letter-spacing: .04em; text-transform: none; }
+.share-sheet-carta.attiva em { color: var(--electric); }
+.share-sheet-carta:has(.share-sheet-pastiglia) { flex-direction: row; align-items: center; gap: 7px; }
+.share-sheet-avviso { margin: -4px 0 0; color: var(--electric); font-size: 11px; line-height: 1.45; }
+.share-sheet-avviso[hidden] { display: none; }

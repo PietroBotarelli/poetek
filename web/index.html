@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0b10" />
+    <meta name="description" content="Poetek: leggi, pubblichi e segui nuova poesia contemporanea." />
+    <title>Poetek — Nuova poesia contemporanea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Le tre dell'interfaccia più i caratteri che l'autore può scegliere per
+         la pagina di lettura: dichiararli qui costa una richiesta sola, e il
+         file di ciascuno si scarica solo quando del testo lo usa davvero. -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Crimson+Pro:wght@400&family=DM+Mono:wght@400;500&family=EB+Garamond:wght@400&family=Instrument+Serif:wght@400&family=Libre+Baskerville:wght@400&family=Lora:wght@400&family=Manrope:wght@400;500;600;700&family=Merriweather:wght@400&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Noto+Serif:wght@400&family=Playfair+Display:wght@400&family=Source+Serif+4:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=2.3.0" />
+    <link rel="stylesheet" href="editorial-direction.css?v=2.3.0" />
+    <!-- URL e publishable key pubblici del progetto Supabase. -->
+    <script src="beta-config.js?v=2.3.0" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0" integrity="sha384-UagCvVPT5XXA0Hx+nJYUAGBFseHT9zBgpJMSebsAxl9lciTwbT+39j5VfRjdP5Tp" crossorigin="anonymous" defer></script>
+    <script src="backend.js?v=2.3.0" defer></script>
+    <script src="main.js?v=2.3.0" type="module"></script>
+  </head>
+  <body>
+    <svg class="paper-filter-definitions" aria-hidden="true" focusable="false" width="0" height="0">
+      <filter id="poetek-paper-warp" x="-12%" y="-14%" width="124%" height="128%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.034" numOctaves="2" seed="17" result="paper-noise" />
+        <feDisplacementMap in="SourceGraphic" in2="paper-noise" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <div class="app-shell">
+      <aside id="main-navigation" class="side-rail">
+        <a class="brand" href="#home" aria-label="Poetek, home"><span class="brand-glyph">p</span><span class="brand-name">poetek</span></a>
+        <nav class="side-nav" aria-label="Navigazione principale">
+          <a class="side-link active" data-route="home" href="#home"><span>Home</span></a>
+
+          <a class="side-link" data-route="discover" href="#scopri"><span>Leggi</span></a>
+          <a class="side-link" data-route="publish" href="#pubblica"><span>Pubblica</span></a>
+          <a class="side-link" data-route="library" href="#libreria"><span>La tua libreria</span></a>
+          <a class="side-link" data-route="account" href="#profilo"><span data-current-profile>Il tuo profilo</span></a>
+          <a class="side-link" data-route="about" href="#chi-siamo"><span>Chi siamo</span></a>
+        </nav>
+        <div class="rail-footer"><span class="signal"></span><span data-session-label>Beta locale</span></div>
+      </aside>
+      <button class="menu-scrim" data-menu-close aria-label="Chiudi il menu" tabindex="-1"></button>
+      <main class="main-stage">
+        <header class="topbar">
+          <button class="menu-toggle" data-menu-toggle aria-label="Apri il menu" aria-controls="main-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+          <p class="topbar-title">Leggi e pubblica poesia contemporanea</p>
+          <div class="topbar-status"><span class="status-orb"></span><span data-beta-status>Beta aperta</span></div>
+          <div class="topbar-access" data-beta-access-panel hidden>
+            <button class="topbar-access-button" type="button" data-open-auth>Accedi</button>
+          </div>
+        </header>
+        <div id="app" tabindex="-1"></div>
+      </main>
+    </div>
+    <section id="beta-auth-gate" class="beta-auth-gate" hidden aria-live="polite">
+      <div class="beta-auth-panel" role="dialog" aria-modal="true" aria-labelledby="beta-auth-title">
+        <p class="kicker">Poetek Beta</p>
+        <h1 id="beta-auth-title">Entra in Poetek.</h1>
+        <p id="beta-auth-intro">Accedi con le tue credenziali oppure crea una volta sola il tuo profilo.</p>
+        <div class="beta-auth-modes" role="group" aria-label="Scegli tra accesso e registrazione">
+          <button class="is-active" type="button" data-auth-mode="signin" aria-pressed="true">Accedi</button>
+          <button type="button" data-auth-mode="signup" aria-pressed="false">Registrati</button>
+        </div>
+        <form id="beta-auth-form">
+          <label data-auth-name-field hidden><span>Nome pubblico</span><input name="displayName" type="text" autocomplete="name" minlength="1" maxlength="80" placeholder="Il nome che vedranno i lettori" /></label>
+          <label data-auth-email-field><span>La tua email</span><input name="email" type="email" autocomplete="email" required placeholder="nome@example.com" /></label>
+          <label data-auth-password-field><span>Password</span><input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Almeno 8 caratteri" /></label>
+          <label data-auth-confirm-field hidden><span>Ripeti la password</span><input name="passwordConfirm" type="password" autocomplete="new-password" minlength="8" placeholder="Ripeti la password" /></label>
+          <label data-auth-terms-field hidden><input name="acceptTerms" type="checkbox" /> Accetto le <a href="legal/terms-of-use.html" target="_blank" rel="noopener">condizioni d’uso</a>. Ho letto l’<a href="legal/privacy-policy.html" target="_blank" rel="noopener">informativa privacy</a>.</label>
+          <button data-auth-submit type="submit">Accedi</button>
+        </form>
+        <div class="beta-auth-secondary">
+          <button type="button" data-auth-recover>Hai dimenticato la password?</button>
+          <button type="button" data-auth-back hidden>← Torna all'accesso</button>
+        </div>
+        <p id="beta-auth-message"></p>
+        <button class="beta-auth-close" data-auth-close type="button">Continua come lettore</button>
+      </div>
+    </section>
+    <footer class="legal-footer"><a href="legal/privacy-policy.html">Privacy</a> · <a href="legal/terms-of-use.html">Condizioni d’uso</a> · <a href="mailto:pietrobota@gmail.com">Contatti</a></footer>
+  </body>
+</html>
